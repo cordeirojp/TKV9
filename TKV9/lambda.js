@@ -1,8 +1,7 @@
 const { TWILIO_ACCOUNT, TWILIO_API_KEY, SEND_FROM } = process.env;
 const client = require('twilio')(TWILIO_ACCOUNT, TWILIO_API_KEY);
 
-exports.handler = function(event, context, callback) {
-    
+exports.handler = function(event, context, callback) { 
     const Jeton = event['Jeton'];
     const Numero = event['Numero'];
     
@@ -21,7 +20,7 @@ exports.handler = function(event, context, callback) {
     client.calls
         .create({
             url: "http://twimlets.com/echo?"+'Twiml='+encodeURIComponent(myTwiML),
-            to: Numero,
+            to: Numero
             from: SEND_FROM
             })
         .then(call => console.log('OK : CallID = '+call.sid))

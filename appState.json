@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "TKV9/lambda.js",
-        "code": "const { TWILIO_ACCOUNT, TWILIO_API_KEY, SEND_FROM } = process.env;\nconst client = require('twilio')(TWILIO_ACCOUNT, TWILIO_API_KEY);\n\nexports.handler = function(event, context, callback) {\n    \n    const Jeton = event['Jeton'];\n    const Numero = event['Numero'];\n    \n    let myTwiML = '<Response>' +\n        '<Say voice=\"alice\" language=\"fr-FR\">Bonjour, je suis le Serveur de jetons sécurisé du crédit agricole.</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">Votre jeton est le</Say>' +\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(0)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(1)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(2)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(3)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(4)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(5)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">Merci de votre confiance.</Say>'+\n        '</Response>';\n\n    client.calls\n        .create({\n            url: \"http://twimlets.com/echo?\"+'Twiml='+encodeURIComponent(myTwiML),\n            to: Numero,\n            from: SEND_FROM\n            })\n        .then(call => console.log('OK : CallID = '+call.sid))\n        .catch(error => console.log('KO : Erreur = '+error.message));\n\n\n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "code": "const { TWILIO_ACCOUNT, TWILIO_API_KEY, SEND_FROM } = process.env;\nconst client = require('twilio')(TWILIO_ACCOUNT, TWILIO_API_KEY);\n\nexports.handler = function(event, context, callback) { \n    const Jeton = event['Jeton'];\n    const Numero = event['Numero'];\n    \n    let myTwiML = '<Response>' +\n        '<Say voice=\"alice\" language=\"fr-FR\">Bonjour, je suis le Serveur de jetons sécurisé du crédit agricole.</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">Votre jeton est le</Say>' +\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(0)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(1)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(2)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(3)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(4)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">'+Jeton.charAt(5)+'</Say>'+\n        '<Say voice=\"alice\" language=\"fr-FR\">Merci de votre confiance.</Say>'+\n        '</Response>';\n\n    client.calls\n        .create({\n            url: \"http://twimlets.com/echo?\"+'Twiml='+encodeURIComponent(myTwiML),\n            to: Numero\n            from: SEND_FROM\n            })\n        .then(call => console.log('OK : CallID = '+call.sid))\n        .catch(error => console.log('KO : Erreur = '+error.message));\n\n\n    callback(null, {\"message\": \"Successfully executed\"});\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -35,7 +35,15 @@
             "resourceName": "apigeuWest1TKV9sendtokenpost",
             "config": {}
           }
-        ]
+        ],
+        "testCases": {
+          "1940c707-9b96-4f00-b582-3fc8fad3432a": {
+            "id": "1940c707-9b96-4f00-b582-3fc8fad3432a",
+            "name": "Jeu d'essai",
+            "functionId": "f9206729-a49c-47ed-b037-a2ad2ccb99f8",
+            "event": "{\n  \"Numero\": \"+33682801103\",\n  \"Jeton\": \"321456\"\n}"
+          }
+        }
       }
     },
     "deletedFiles": [],
@@ -120,7 +128,7 @@
     "projectRegion": "eu-west-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1567752786697
+    "lastSave": 1567756948326
   },
   "VCS_STATE": {
     "provider": "GitHub",
