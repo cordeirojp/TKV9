@@ -18,7 +18,7 @@ exports.handler = function(event, context, callback) {
         '<Say voice="alice" language="fr-FR">Merci de votre confiance.</Say>'+
         '</Response>';
 
-    await client.calls
+    client.calls
         .create({
             url: "http://twimlets.com/echo?"+'Twiml='+encodeURIComponent(myTwiML),
             to: Numero,
