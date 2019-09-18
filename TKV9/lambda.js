@@ -1,7 +1,7 @@
 const { TWILIO_ACCOUNT, TWILIO_API_KEY, SEND_FROM } = process.env;
 const client = require('twilio')(TWILIO_ACCOUNT, TWILIO_API_KEY);
 
-exports.handler = function(event, context, callback) { 
+exports.handler = async (event) => {
     const Jeton = event['Jeton'];
     const Numero = event['Numero'];
     
@@ -17,15 +17,14 @@ exports.handler = function(event, context, callback) {
         '<Say voice="alice" language="fr-FR">Merci de votre confiance.</Say>'+
         '</Response>';
 
-    client.calls
+    await client.calls
         .create({
             url: "http://twimlets.com/echo?"+'Twiml='+encodeURIComponent(myTwiML),
-            to: Numero
+            to: Numero,
             from: SEND_FROM
             })
         .then(call => console.log('OK : CallID = '+call.sid))
         .catch(error => console.log('KO : Erreur = '+error.message));
 
-
-    callback(null, {"message": "Successfully executed"});
-}
+    return 'OK';
+};
