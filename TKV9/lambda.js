@@ -6,7 +6,7 @@ exports.handler = async (event) => {
     const Numero = event['Numero'];
     
     let myTwiML = '<Response>' +
-        '<Say voice="alice" language="fr-FR">Bonjour, je suis le Serveur de jetons sÃ©curisÃ© du crÃ©dit agricole.</Say>'+
+        '<Say voice="alice" language="fr-FR">Bonjour, je suis le Serveur de jetons credit agricole.</Say>'+
         '<Say voice="alice" language="fr-FR">Votre jeton est le</Say>' +
         '<Say voice="alice" language="fr-FR">'+Jeton.charAt(0)+'</Say>'+
         '<Say voice="alice" language="fr-FR">'+Jeton.charAt(1)+'</Say>'+
