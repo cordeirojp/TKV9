@@ -23,8 +23,8 @@ exports.handler = async (event) => {
             to: Numero,
             from: SEND_FROM
             })
-        .then(call => console.log('OK : CallID = '+call.sid))
-        .catch(error => console.log('KO : Erreur = '+error.message));
+        .then(call => console.log('OK - CallID = '+call.sid))
+        .catch(error => console.log('KO - Erreur = '+error.message));
 
     return 'OK';
 };
